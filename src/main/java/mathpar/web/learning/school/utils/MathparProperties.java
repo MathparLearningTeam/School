@@ -13,7 +13,7 @@ public class MathparProperties {
     private String databasePassword;
     private String databaseUrl;
 
-    private String authenticationPrefix;
+    private String accountPrefix;
 
     public void loadPropertiesFromManager(String secretmanagerUrlPrefix) {
         RestTemplate restTemplate = new RestTemplate();
@@ -23,7 +23,7 @@ public class MathparProperties {
         this.databaseUsername = namespaceProperties.databaseUsername;
         this.databaseUrl = namespaceProperties.databaseUrl;
 
-        this.authenticationPrefix = namespaceProperties.authenticationUrl;
+        this.accountPrefix = namespaceProperties.accountUrl;
     }
 
     @Data
@@ -35,7 +35,7 @@ public class MathparProperties {
         @JsonProperty("DatabasePassword")
         private String databasePassword;
 
-        @JsonProperty("AuthenticationUrl")
-        private String authenticationUrl;
+        @JsonProperty("AccountUrl")
+        private String accountUrl;
     }
 }

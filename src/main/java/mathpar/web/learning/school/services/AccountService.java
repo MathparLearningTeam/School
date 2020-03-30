@@ -14,7 +14,7 @@ public class AccountService {
     private final static RestTemplate restTemplate = new RestTemplate();
 
     public AccountService(MathparProperties properties) {
-        this.prefix = properties.getAuthenticationPrefix();
+        this.prefix = properties.getAccountPrefix();
     }
 
     public Optional<Long> getAccountId(String email){
