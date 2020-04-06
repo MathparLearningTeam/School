@@ -23,7 +23,6 @@
 	<scm>
 		<url>https://github.com/MathparLearningTeam/School</url>
 		<developerConnection>svm:git:https://github.com/MathparLearningTeam/School</developerConnection>
-		<tag>0.1.0-SNAPSHOT</tag>
 	</scm>
 
 	<dependencies>
