@@ -8,6 +8,7 @@ import mathpar.web.learning.school.utils.exceptions.MalformedDataException;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 public class UserProfileService {
@@ -17,6 +18,10 @@ public class UserProfileService {
     public UserProfileService(AccountService accountService, UserProfileRepository userProfileRepository) {
         this.accountService = accountService;
         this.userProfileRepository = userProfileRepository;
+    }
+
+    public List<UserProfile> getProfiles(long accountId){
+        return userProfileRepository.findAllByAccountId(accountId);
     }
 
     public UserProfile createProfile(long accountId, School school, Role role){

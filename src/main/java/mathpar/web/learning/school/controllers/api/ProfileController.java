@@ -10,6 +10,9 @@ import mathpar.web.learning.school.utils.dto.payloads.CreateProfilePayload;
 import mathpar.web.learning.school.utils.dto.responses.UserProfileResponse;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import static mathpar.web.learning.school.utils.SchoolUrls.PROFILE_URL;
 
 @PublicApi
@@ -20,6 +23,12 @@ public class ProfileController {
 
     public ProfileController(UserProfileService userProfileService) {
         this.userProfileService = userProfileService;
+    }
+
+    @GetMapping("/getAllProfiles")
+    public List<UserProfileResponse> getAllProfiles(){
+        return userProfileService.getProfiles(SecurityUtils.getUserAuthentication().getPrincipal())
+                .stream().map(UserProfileResponse::new).collect(Collectors.toList());
     }
 
     @GetMapping(PROFILE_URL)
