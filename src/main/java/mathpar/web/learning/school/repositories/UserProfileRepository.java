@@ -16,4 +16,5 @@ public interface UserProfileRepository extends JpaRepository<UserProfile, Long> 
 
     void deleteBySchool(School school);
 
+    List<UserProfile> findAllByAccountId(long accountId);
 }
