@@ -20,7 +20,7 @@ public class AccountService {
     public Optional<Long> getAccountId(String email){
         try {
             return Optional.ofNullable(restTemplate.getForObject(prefix + "/accountId?email={email}", Long.class, email));
-        }catch (HttpClientErrorException.NotFound ex){
+        }catch (HttpClientErrorException.BadRequest ex){
             return Optional.empty();
         }
     }
