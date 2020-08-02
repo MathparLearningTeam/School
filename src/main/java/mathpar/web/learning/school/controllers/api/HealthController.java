@@ -1,10 +1,12 @@
-package mathpar.web.learning.school.controllers;
+package mathpar.web.learning.school.controllers.api;
 
 import lombok.Data;
+import mathpar.web.learning.school.utils.PublicApi;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@PublicApi
 @RestController
 public class HealthController {
     @Value("${mathpar.project.version}")
