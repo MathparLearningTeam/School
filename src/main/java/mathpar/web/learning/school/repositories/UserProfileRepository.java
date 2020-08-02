@@ -17,4 +17,7 @@ public interface UserProfileRepository extends JpaRepository<UserProfile, Long> 
     void deleteBySchool(School school);
 
     List<UserProfile> findAllByAccountId(long accountId);
+
+    @Query(value = "select school_id from user_profiles where profile_id=?1", nativeQuery = true)
+    Long getSchoolId(long profileId);
 }

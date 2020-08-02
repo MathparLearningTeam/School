@@ -19,4 +19,12 @@ public enum Role {
         }
         throw new MalformedDataException(String.format("Invalid string  %s, can't find appropriate school user type", userType));
     }
+
+    /**
+     * This method checks if the position can be requested by user. For example, Director position can never be requested.
+     * @return true if user can send request to apply for this role
+     */
+    public boolean canBeRequested(){
+        return this.equals(Teacher) || this.equals(HeadTeacher);
+    }
 }

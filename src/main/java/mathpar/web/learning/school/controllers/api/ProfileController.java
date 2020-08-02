@@ -7,7 +7,12 @@ import mathpar.web.learning.school.utils.PublicApi;
 import mathpar.web.learning.school.utils.ResponseMapper;
 import mathpar.web.learning.school.utils.SecurityUtils;
 import mathpar.web.learning.school.utils.dto.payloads.CreateProfilePayload;
+import mathpar.web.learning.school.utils.dto.payloads.RequestProfilePayload;
+import mathpar.web.learning.school.utils.dto.responses.RequestProfileResponse;
 import mathpar.web.learning.school.utils.dto.responses.UserProfileResponse;
+import mathpar.web.learning.school.utils.exceptions.InvalidAccountException;
+import mathpar.web.learning.school.utils.exceptions.MalformedDataException;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -44,5 +49,17 @@ public class ProfileController {
         var authentication = SecurityUtils.getUserAuthentication().getDetails();
         var school = authentication.getSchool();
         return ResponseMapper.mapProfileToResponse(userProfileService.createProfile(payload.getEmail(), school, payload.getRole()), false);
+    }
+
+    @PostMapping("/requestProfile")
+    @PreAuthorize("!isAnonymous()")
+    public RequestProfileResponse requestProfile(@RequestBody RequestProfilePayload payload){
+        if(!payload.getPosition().canBeRequested()) throw new MalformedDataException("This role can't be requested");
+        try {
+            userProfileService.requestProfile(payload.getDirectorEmail(), payload.getPosition());
+        }catch (InvalidAccountException e){
+            throw new MalformedDataException(e.getMessage());
+        }
+        return new RequestProfileResponse(true);
     }
 }
