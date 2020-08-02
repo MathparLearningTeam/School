@@ -54,7 +54,7 @@ public class ProfileController {
     @PostMapping("/requestProfile")
     @PreAuthorize("!isAnonymous()")
     public RequestProfileResponse requestProfile(@RequestBody RequestProfilePayload payload){
-        if(!payload.getPosition().canBeAppliedTo()) throw new MalformedDataException("This role can't be requested");
+        if(!payload.getPosition().canBeRequested()) throw new MalformedDataException("This role can't be requested");
         try {
             userProfileService.requestProfile(payload.getDirectorEmail(), payload.getPosition());
         }catch (InvalidAccountException e){

@@ -24,7 +24,7 @@ public enum Role {
      * This method checks if the position can be requested by user. For example, Director position can never be requested.
      * @return true if user can send request to apply for this role
      */
-    public boolean canBeAppliedTo(){
+    public boolean canBeRequested(){
         return this.equals(Teacher) || this.equals(HeadTeacher);
     }
 }
