@@ -6,6 +6,7 @@ public class SchoolUrls {
 
     public final static String SCHOOL_URL = "/";
     public final static String GET_SCHOOL_PROFILES_URL = "/schoolProfiles";
+    public final static String IS_SCHOOL_NAME_AVAILABLE_URL = "/isSchoolNameAvailable";
 
 
     public final static String GROUP_URL = "/group";
