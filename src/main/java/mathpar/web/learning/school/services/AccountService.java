@@ -2,6 +2,7 @@ package mathpar.web.learning.school.services;
 
 import mathpar.web.learning.school.utils.MathparProperties;
 import mathpar.web.learning.school.utils.dto.account.payloads.CreateTemporaryAccountPayload;
+import mathpar.web.learning.school.utils.dto.account.responses.Account;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
@@ -33,6 +34,11 @@ public class AccountService {
         return Optional.ofNullable(restTemplate.getForObject(prefix+"/isTokenValid?token={token}", Boolean.class, token)).orElse(false);
     }
 
+    public Optional<Account> getAccount(long id){
+        return Optional.ofNullable(restTemplate.getForObject(prefix+"/account?id={id}", Account.class, id));
+    }
+
+    @Deprecated
     public boolean isEmailAvailable(String email){
         return Optional.ofNullable(restTemplate.getForObject(prefix+"/principalAvailable?principal={principal}", Boolean.class, email)).orElse(false);
     }

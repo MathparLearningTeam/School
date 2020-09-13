@@ -45,8 +45,8 @@ public class SchoolService {
         return userProfileRepository.findBySchoolAndRole(new School(schoolId), Role.Student);
     }
 
-    public boolean isSchoolNameUnassigned(String email){
-        return schoolRepository.isSchoolNameUnassigned(email).isEmpty();
+    public boolean isSchoolNameUnassigned(String schoolName){
+        return schoolRepository.isSchoolNameUnassigned(schoolName).isEmpty();
     }
 
     @Transactional

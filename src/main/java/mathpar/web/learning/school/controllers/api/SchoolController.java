@@ -8,14 +8,15 @@ import mathpar.web.learning.school.utils.ResponseMapper;
 import mathpar.web.learning.school.utils.SecurityUtils;
 import mathpar.web.learning.school.utils.dto.payloads.CreateSchoolPayload;
 import mathpar.web.learning.school.utils.dto.responses.GetSchoolUsersResponse;
+import mathpar.web.learning.school.utils.dto.responses.IsSchoolNameAvailableResponse;
 import mathpar.web.learning.school.utils.dto.responses.SchoolResponse;
 import mathpar.web.learning.school.utils.enums.Role;
 import org.springframework.web.bind.annotation.*;
 
 import static mathpar.web.learning.school.utils.ResponseMapper.mapProfileToResponse;
 import static mathpar.web.learning.school.utils.ResponseMapper.mapSchoolToResponse;
-import static mathpar.web.learning.school.utils.SchoolUrls.GET_SCHOOL_PROFILES_URL;
-import static mathpar.web.learning.school.utils.SchoolUrls.SCHOOL_URL;
+import static mathpar.web.learning.school.utils.SchoolUrls.*;
+import static mathpar.web.learning.school.utils.ValidationUtilities.hasText;
 
 @PublicApi
 @RestController
@@ -60,5 +61,12 @@ public class SchoolController {
         var authenticationDetails = SecurityUtils.getUserAuthentication().getDetails();
         long schoolId = authenticationDetails.getSchool().getId();
         schoolService.purgeSchool(schoolId);
+    }
+
+    @GetMapping(IS_SCHOOL_NAME_AVAILABLE_URL)
+    public IsSchoolNameAvailableResponse isSchoolNameAvailable(@RequestParam("schoolName") String schoolName){
+        hasText(schoolName, "School name can't be empty");
+
+        return new IsSchoolNameAvailableResponse(schoolService.isSchoolNameUnassigned(schoolName));
     }
 }
